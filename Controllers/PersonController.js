@@ -6,7 +6,9 @@ class PersonController{
     
     getAllPersons = async (req,res)=>{
         try {
-            const result = await Person.findAll()
+            const result = await Person.findAll({
+                attributes: ["name","lastName","email"]
+            })
             if (result.length === 0) throw new Error ("No se encontraron personas") 
 
             res.status(200).send({
@@ -50,15 +52,53 @@ class PersonController{
         try {
             const {name,lastName,email,password,rolId} = req.body
             const result = Person.create({name,lastName,email,password,rolId})
+            if(!result) throw new Error("No se pudo crear la persona")
             res.status(200).send("Persona creada exitosamente");
         } catch (error) {
             res.status(400).send({
                 success:false,
-                result: error
+                result: error,
+                message: error.message
             })
         }
     }
 
+    modifyPerson = async(req,res) =>{
+        try {
+            const {id,name,lastName,email,password,rolId} = req.body
+            const result = await Person.update({name,lastName,email,password,rolId},{
+                where:{
+                    id : id,
+                }
+            })
+            if(result[0] === 0) throw new Error("La persona no pudo ser editada")
+            res.status(200).send("Persona editada exitosamente");
+        } catch (error) {
+            res.status(400).send({
+                success:false,
+                result: error,
+                message: error.message
+            })
+        }
+    }
+    
+    deletePerson = async (req,res) => {
+        try {
+            const id = req.body.id
+            const result = await Person.destroy({
+                where:{
+                    id : id,
+                }
+            })
+            res.status(200).send(`Se borro exitosamente la Persona con el id ${id}`)
+        } catch (error) {
+            res.status(400).send({
+                success:false,
+                result: error,
+                message: error.message
+            })
+        }
+    }
 }
 
 export default PersonController

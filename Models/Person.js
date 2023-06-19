@@ -15,7 +15,10 @@ Person.init({
     },
     email:{
         type:DataTypes.STRING,
-        allowNull:false
+        allowNull:false,
+        validate:{
+            isEmail:true,
+        }
     },
     password:{
         type:DataTypes.STRING,

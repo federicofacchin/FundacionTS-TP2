@@ -6,9 +6,11 @@ import PersonController from "../Controllers/personController.js";
 const personController = new PersonController();
 
 personRoutes.get("/",personController.getAllPersons);
-
 personRoutes.get("/:id",personController.getPersonById);
 personRoutes.post("/", personController.createPerson);
+personRoutes.put("/:id",personController.modifyPerson);
+personRoutes.delete("/:id",personController.deletePerson);
+
 /*personRoutes.get("/", (req,res) => {
     const query = "SELECT name, lastName, email FROM people";
     connection.query(query, (err , response , fields) => {
@@ -34,7 +36,6 @@ personRoutes.get("/:id", (req,res) => {
         res.send(response)
     })
 });
-*/
 personRoutes.post("/", (req,res) => {
     const {name, lastName,password,email} = req.body
     const query = `INSERT INTO people(name,lastName,password,email) VALUES("${name}", "${lastName}" ," ${password} ","${email}")`;
@@ -48,7 +49,7 @@ personRoutes.post("/", (req,res) => {
 personRoutes.put("/:id", (req,res) => {
     const {name, lastName,password,email,id} = req.body
     const query = `UPDATE people SET name="${name}",lastName="${lastName}",password="${password}",email="${email}" WHERE id=${id}`;
-
+    
     connection.query(query, (err , response , fields) => {
         if (err){
             throw err
@@ -73,6 +74,7 @@ personRoutes.delete("/:id", (req,res) => {
         response.affectedRows ? res.send("borro persona por id") : res.send("usuario no encontrado");
     });
 });
+*/
 
 
 export default personRoutes;
