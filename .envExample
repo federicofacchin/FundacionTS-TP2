@@ -1,0 +1,6 @@
+DATABASE = nombre_base_datos
+DB_USERNAME = Usuario
+DB_PASSWORD = Password
+HOST = host
+DIALECT = "tedious"
+PORT = 3306

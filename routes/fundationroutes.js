@@ -1,7 +1,7 @@
 import { Router, response } from "express";
 const fundationRoutes = Router();
 
-import connection from "../connectionToDB/index.js";
+import connection from "../connectionToDB/connection.js";
 
 fundationRoutes.get("/", (req,res) => {
     const query = "SELECT id, name,CBU, collected FROM fundation";
