@@ -46,6 +46,19 @@ class PersonController{
 
     }
 
+    createPerson = async(req,res) =>{
+        try {
+            const {name,lastName,email,password,rolId} = req.body
+            const result = Person.create({name,lastName,email,password,rolId})
+            res.status(200).send("Persona creada exitosamente");
+        } catch (error) {
+            res.status(400).send({
+                success:false,
+                result: error
+            })
+        }
+    }
+
 }
 
 export default PersonController

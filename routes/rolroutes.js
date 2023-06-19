@@ -1,7 +1,7 @@
 import { Router, response } from "express";
 const rolRoutes = Router();
 
-import connection from "../connectionToDB/index.js";
+import connection from "../connectionToDB/connection.js";
 
 rolRoutes.get("/", (req,res) => {
     const query = "SELECT id, name FROM rol";

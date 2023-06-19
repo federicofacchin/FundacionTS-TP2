@@ -1,7 +1,7 @@
 import { Router, response } from "express";
 const donationRoutes = Router();
 
-import connection from "../connectionToDB/index.js";
+import connection from "../connectionToDB/connection.js";
 
 donationRoutes.get("/", (req,res) => {
     const query = "SELECT id, idPerson, idFundation, amount  FROM donation";

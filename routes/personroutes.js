@@ -8,7 +8,7 @@ const personController = new PersonController();
 personRoutes.get("/",personController.getAllPersons);
 
 personRoutes.get("/:id",personController.getPersonById);
-
+personRoutes.post("/", personController.createPerson);
 /*personRoutes.get("/", (req,res) => {
     const query = "SELECT name, lastName, email FROM people";
     connection.query(query, (err , response , fields) => {
