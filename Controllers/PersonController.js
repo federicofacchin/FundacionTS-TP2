@@ -1,4 +1,4 @@
-import Person from "../Models/Person.js"
+import {Person} from "../Models/index.js"
 class PersonController{
     constructor(){  
     }

@@ -23,10 +23,6 @@ Person.init({
     password:{
         type:DataTypes.STRING,
         allowNull:false 
-    },
-    rolId:{
-        type:DataTypes.INTEGER,
-        allowNull:false 
     }
 },{
     sequelize: connection,
