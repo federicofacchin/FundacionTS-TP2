@@ -2,6 +2,7 @@
 import Person from "./Person.js"
 import Rol from "./Rol.js"
 import Donation from "./Donation.js"
+import Fundation from "./Fundation.js"
 
 Rol.hasMany(Person)
 Person.belongsTo(Rol)
@@ -9,5 +10,6 @@ Person.belongsTo(Rol)
 export {
     Person,
     Rol,
-    Donation
+    Donation,
+    Fundation
 }
