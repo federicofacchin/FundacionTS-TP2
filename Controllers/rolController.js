@@ -27,12 +27,15 @@ class RolController{
     getRolById = async (req, res) => {
         try {
             const result = await Rol.findByPk(req.body.id)
-            if (result) throw new Error ("No se encontro al Rol")
+            if (!result) throw new Error ("No se encontro al Rol")
 
             res.status(200).send({
                 success:true,
                 message:"Este es el Rol pedido",
-                result: result
+                result: {
+                    name: result.getDataValue("name"),
+                    description: result.getDataValue("description")
+                }
             });
         } catch (error) {
             res.status(400).send({
