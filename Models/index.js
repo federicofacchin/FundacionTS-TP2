@@ -1,11 +1,13 @@
 //aca van importados todos los modelos para hacer las relaciones entre las tablas
 import Person from "./Person.js"
+import Rol from "./Rol.js"
+import Donation from "./Donation.js"
 
-//import Role from "./Role.js"
-//Role.hasMany(Person)
-//Person.belongsTo(Role)
+Rol.hasMany(Person)
+Person.belongsTo(Rol)
 
 export {
-    Person
-    //Role
+    Person,
+    Rol,
+    Donation
 }
