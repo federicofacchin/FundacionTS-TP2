@@ -7,6 +7,15 @@ import Fundation from "./Fundation.js"
 Rol.hasMany(Person)
 Person.belongsTo(Rol)
 
+Fundation.hasMany(Donation)
+Donation.belongsTo(Fundation)
+
+Donation.hasOne(Fundation)
+Donation.hasOne(Person)
+Person.belongsTo(Donation)
+Person.belongsTo(Donation)
+
+
 export {
     Person,
     Rol,
