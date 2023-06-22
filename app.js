@@ -6,6 +6,7 @@ import { serverPort } from "./config/config.js";
 import personSeed from "./seed/personSeed.js";
 import rolSeed from "./seed/rolSeed.js";
 import donationSeed from "./seed/donationSeed.js"
+import fundationSeed from "./seed/fundationSeed.js";
 
 //middleWare
 app.use(express.json())
@@ -19,7 +20,7 @@ await connection.sync({force:true}).then(() =>{
     app.listen(serverPort,()=>{
         console.log("puerto ok http://localhost:8080")
     });    
-}).then(() => rolSeed()).then(() => personSeed()).then(() => donationSeed());
+}).then(() => rolSeed()).then(() => personSeed()).then(() => donationSeed()).then(() => fundationSeed());
 
 
 
