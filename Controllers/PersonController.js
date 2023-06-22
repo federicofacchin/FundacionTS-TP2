@@ -55,13 +55,22 @@ class PersonController{
             if(!result) throw new Error("No se pudo crear la persona")
             res.status(200).send("Persona creada exitosamente");
         } catch (error) {
+            // if (error instanceof sequelizeError.ValidationError) {
+            //     res.status(400).send({
+            //       success: false,
+            //       result: error,
+            //       message: "Error de validación en los datos proporcionados",
+            //       validationErrors: error.errors,
+            //     });
+            // }else {
             res.status(400).send({
                 success:false,
                 result: error,
                 message: error.message
             })
+            }
         }
-    }
+    
 
     modifyPerson = async(req,res) =>{
         try {
