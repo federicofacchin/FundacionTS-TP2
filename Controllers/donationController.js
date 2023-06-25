@@ -1,4 +1,4 @@
-import {Donation,Person,Fundation} from "../Models/index.js"
+import {Donation,Person,Fundation,Rol} from "../Models/index.js"
 
 class  DonationController{
     constructor(){
@@ -54,6 +54,10 @@ class  DonationController{
             const {PersonId,FundationId,amount} = req.body
             const personResult = await Person.findByPk(PersonId);
             const fundationResult = await Fundation.findByPk(FundationId);
+            const rolResult = await Rol.findByPk(personResult.dataValues.RolId)
+
+            if(rolResult.dataValues.name === "Administrador") throw new Error("Usted no esta autorizado para realizar donaciones")
+
             if(!personResult){
                     throw new Error("Persona inexistente")
             } else if(personResult.getDataValue('idRol') == 0) {
@@ -67,8 +71,9 @@ class  DonationController{
             const {id,name,CBU} = fundationResult.dataValues
             var collected = Number(fundationResult.dataValues.collected)
             collected+= Number(amount);
-            console.log(id,name,CBU,collected)
-           const resultUpdatedFundation = await Fundation.update({name,CBU,collected},{
+            //console.log(id,name,CBU,collected)
+
+            const resultUpdatedFundation = await Fundation.update({name,CBU,collected},{
                 where:{
                     id : id,
                 }
