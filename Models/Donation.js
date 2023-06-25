@@ -5,14 +5,6 @@ import { DataTypes,Model } from "sequelize";
 class Donation extends Model {}
 
 Donation.init({
-    idPerson:{
-        type:DataTypes.INTEGER,
-        allowNull:false
-    },
-    idFundation:{
-        type:DataTypes.INTEGER,
-        allowNull:false
-    },
     amount:{
         type:DataTypes.INTEGER,
         allowNull:false

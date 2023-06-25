@@ -1,5 +1,5 @@
 import {Donation,Person,Fundation} from "../Models/index.js"
- 
+
 class  DonationController{
     constructor(){
 
@@ -7,7 +7,7 @@ class  DonationController{
  getAllDonations = async (req,res)=>{
         try {
             const result = await Donation.findAll({
-                attributes: ["persona","fundacion","donacion"]
+                attributes: ["PersonId","FundationId","amount"]
             })
             if (result.length === 0) throw new Error ("No se encontraron donaciones") 
 
@@ -33,8 +33,8 @@ class  DonationController{
 
             res.status(200).send({
                 success:true,
-                persona : result.idPerson,
-                fundacino: result.idFundation,
+                persona : result.PersonId,
+                fundacion: result.FundationId,
                 donacion: result.amount,
                 
             })
@@ -51,15 +51,31 @@ class  DonationController{
 
     createDonation = async(req,res) =>{
         try {
-            const {idPerson,idFundation,amount} = req.body
-            const personResult = await Person.findByPk(idPerson);
-            const fundationResult = await Fundation.findByPk(idFundation);
+            const {PersonId,FundationId,amount} = req.body
+            const personResult = await Person.findByPk(PersonId);
+            const fundationResult = await Fundation.findByPk(FundationId);
             if(!personResult){
                     throw new Error("Persona inexistente")
             } else if(personResult.getDataValue('idRol') == 0) {
-
+                throw new Error("Rol invalido")
             }
+            if(fundationResult === null){
+                throw new Error("Fundacion inexistente")
+            }
+            const result = Donation.create({PersonId,FundationId,amount})
+            if(!result) throw new Error("No se pudo crear la donacion")
+            const {id,name,CBU} = fundationResult.dataValues
+            var collected = Number(fundationResult.dataValues.collected)
+            collected+= Number(amount);
+            console.log(id,name,CBU,collected)
+           const resultUpdatedFundation = await Fundation.update({name,CBU,collected},{
+                where:{
+                    id : id,
+                }
+            })
+            if(resultUpdatedFundation[0] === 0) throw new Error("La fundacion no pudo ser editada")
             
+            res.status(200).send("Donacion creada exitosamente");
         } catch (error) {
             res.status(400).send({
                 success:false,

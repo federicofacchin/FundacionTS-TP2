@@ -1,14 +1,14 @@
 import {Donation} from "../Models/index.js"
-
 const donationSeed = async () => {
+    
     try {
         await  Donation.bulkCreate([{
-            idPerson:1,
-            idFundation:1,
+            PersonId:1,
+            FundationId:1,
             amount:3000
         },{
-            idPerson:2,
-            idFundation:1,
+            PersonId:2,
+            FundationId:1,
             amount:3000
         }])
     } catch (error) {

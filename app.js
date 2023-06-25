@@ -20,7 +20,7 @@ await connection.sync({force:true}).then(() =>{
     app.listen(serverPort,()=>{
         console.log("puerto ok http://localhost:8080")
     });    
-}).then(() => rolSeed()).then(() => personSeed()).then(() => donationSeed()).then(() => fundationSeed());
+}).then(() => rolSeed()).then(() => personSeed()).then(() => fundationSeed()).then(() => donationSeed());
 
 
 
